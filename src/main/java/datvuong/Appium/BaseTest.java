@@ -49,6 +49,45 @@ public class BaseTest {
 		);
 	}
 	
+	public void scrollToEndAction() {
+		
+		boolean canScrollMore;
+		
+		do {
+			canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+			    "left", 100, "top", 100, "width", 200, "height", 200,
+			    "direction", "down",
+			    "percent", 3.0
+			));
+		} while (canScrollMore);
+		
+	}
+	
+	public void swipeAction(WebElement element, String direction, double percent) {
+		//swipe
+				/*
+				 * Supported arguments elementId: The id of the element to be swiped. If the
+				 * element id is missing then swipe bounding area must be provided. If both the
+				 * element id and the swipe bounding area are provided then the area is
+				 * effectively ignored. left: The left coordinate of the swipe bounding area
+				 * top: The top coordinate of the swipe bounding area width: The width of the
+				 * swipe bounding area height: The height of the swipe bounding area direction:
+				 * Swipe direction. Mandatory value. Acceptable values are: up, down, left and
+				 * right (case insensitive) percent: The size of the swipe as a percentage of
+				 * the swipe area size. Valid values must be float numbers in range 0..1, where
+				 * 1.0 is 100%. Mandatory value. speed: The speed at which to perform this
+				 * gesture in pixels per second. The value must not be negative. The default
+				 * value is 5000 * displayDensity Usage examples
+				 */
+				// Java
+		
+		((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+				"elementId", ((RemoteWebElement)element).getId(),
+			    "direction", direction,
+			    "percent", percent
+			));
+	}
+	
 	@AfterClass
 	public void tearDown() {
 		driver.quit();
